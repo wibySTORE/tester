@@ -30,3 +30,27 @@ document.addEventListener("visibilitychange", function () {
         location.reload();
     }
 });
+
+// Event detect user kembali ke tab
+document.addEventListener("visibilitychange", function() {
+    if (document.visibilityState === "visible") {
+        refreshPageWithPopup();
+    }
+});
+
+(function () {
+    // Cek apakah sudah pernah refresh di sesi ini
+    if (sessionStorage.getItem('alreadyRefreshed')) return;
+
+    // Fungsi refresh 1x
+    function refreshOnce() {
+        sessionStorage.setItem('alreadyRefreshed', 'true');
+        location.reload();
+    }
+
+    // Tangkap SEMUA klik di halaman
+    document.addEventListener('click', refreshOnce, { once: true });
+
+    // Opsional: tangkap sentuhan di HP
+    document.addEventListener('touchstart', refreshOnce, { once: true });
+})();
