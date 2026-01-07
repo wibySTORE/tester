@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSS TEAM VVIP</title>
+
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: 'Poppins', sans-serif;
+            background: #020c14;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .judul-putih { color: #fff; }
+        .judul-hijau { color: #00d9ff; }
+
+        /* ===== PARTICLE ===== */
+        canvas#particles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        /* ===== VIDEO ===== */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .video-card {
+            background: rgba(255,255,255,0.08);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,217,255,0.2);
+        }
+
+        .video-title {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body oncontextmenu="return false">
+
+<canvas id="particles"></canvas>
+
+<h1>
+    <span class="judul-putih">GSS TEAM</span>
+    <span class="judul-hijau">VVIP</span>
+</h1>
+
+<div class="video-container">
+
+    <div class="video-card">
+        <div class="video-title">AIMLOCK 100%</div>
+        <div class="video-wrapper">
+            <video controls controlsList="nodownload noplaybackrate"
+                disablePictureInPicture ondragstart="return false;">
+                <source src="video/AIMLOCK TESTI.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="video-title">BODY LOCK</div>
+        <div class="video-wrapper">
+            <video controls controlsList="nodownload noplaybackrate"
+                disablePictureInPicture ondragstart="return false;">
+                <source src="video/BODY LOCK.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="video-title">BODY HS</div>
+        <div class="video-wrapper">
+            <video controls controlsList="nodownload noplaybackrate"
+                disablePictureInPicture ondragstart="return false;">
+                <source src="video/drag hs.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="video-title">DRAG HS 95%</div>
+        <div class="video-wrapper">
+            <video controls controlsList="nodownload noplaybackrate"
+                disablePictureInPicture ondragstart="return false;">
+                <source src="video/drag hs.mp4" type="video/mp4">
+            </video>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== PROTEKSI VIDEO ===== -->
+<script>
+    document.addEventListener('contextmenu', e => {
+        e.preventDefault();
+        alert("Video tidak dapat diunduh!");
+    });
+
+    document.querySelectorAll("video").forEach(v => {
+        v.addEventListener("dragstart", e => e.preventDefault());
+    });
+</script>
+
+<!-- ===== PARTICLE SCRIPT ===== -->
+<script>
+    const canvas = document.getElementById("particles");
+    const ctx = canvas.getContext("2d");
+
+    function resize() {
+        canvas.width = innerWidth;
+        canvas.height = innerHeight;
+    }
+    window.addEventListener("resize", resize);
+    resize();
+
+    const particles = [];
+    for (let i = 0; i < 90; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 2 + 0.5,
+            dx: (Math.random() - 0.5) * 0.4,
+            dy: (Math.random() - 0.5) * 0.4,
+            c: Math.random() > 0.5
+                ? "rgba(0,217,255,0.7)"
+                : "rgba(255,255,255,0.4)"
+        });
+    }
+
+    function draw() {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        particles.forEach(p => {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+            if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fillStyle = p.c;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+</script>
+
+</body>
+</html>

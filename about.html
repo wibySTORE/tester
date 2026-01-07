@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gss Team</title>
+<style>
+    /* ===== GLOBAL STYLING ===== */
+    body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #121212;
+        color: #f0f0f0;
+        line-height: 1.6;
+        overflow-x: hidden;
+    }
+
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    /* ===== PARTICLE CANVAS ===== */
+    #particle-canvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        background-color: #121212;
+    }
+
+    /* ===== HEADER ===== */
+    header {
+        background-color: rgba(30, 30, 30, 0.9);
+        color: #f0f0f0;
+        text-align: center;
+        padding: 50px 20px;
+        border-bottom: 1px solid #1abc9c;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 3em;
+    }
+
+    header p {
+        margin-top: 10px;
+        font-size: 1.2em;
+        color: #bdc3c7;
+    }
+
+    /* ===== NAVIGATION ===== */
+    nav {
+        display: flex;
+        justify-content: center;
+        background-color: rgba(20,20,20,0.95);
+        border-bottom: 1px solid #1abc9c;
+    }
+
+    nav a {
+        display: inline-block;
+        padding: 15px 25px;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #f0f0f0;
+        transition: 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #1abc9c;
+        color: #121212;
+        border-radius: 4px;
+    }
+
+    /* ===== CONTAINER ===== */
+    .container {
+        max-width: 900px;
+        margin: 50px auto;
+        padding: 30px 20px;
+        background-color: rgba(30,30,30,0.9);
+        border-radius: 8px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        font-size: 2em;
+        margin-bottom: 20px;
+        color: #1abc9c;
+    }
+
+    p, li {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        color: #f0f0f0;
+    }
+
+    ul {
+        margin-left: 20px;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+        text-align: center;
+        padding: 30px 0;
+        background-color: rgba(30,30,30,0.9);
+        color: #f0f0f0;
+        margin-top: 50px;
+        border-top: 1px solid #1abc9c;
+    }
+</style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particle-canvas"></canvas>
+<nav>
+    <a href="#home">Home</a>
+    <a href="#about">About</a>
+    <a href="index.html">Produk</a>
+    <a href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7">Laporan</a>
+</nav>
+
+<div class="container" id="home">
+    <h2>WELCOME GSS TEAM</h2>
+    <p style="text-align:center;">
+        Sebelum Kalian Order Utamakan kalian Pilih Yang Benar Masalahnya Di Store Kami Tidak Bisa <strong>REFFUND</strong>, Dan Buat Kalian Semua Thanks You Banget Sudah Order Di Gss Team.
+    </p>
+</div>
+
+<div class="container" id="about">
+    <h2>Tentang Kami</h2>
+    <p><strong>Gss Team</strong> didirikan pada tahun <strong>2023</strong> dengan misi untuk menjadi toko online terpercaya dan modern. Kami berkomitmen memberikan layanan terbaik untuk semua pelanggan.</p>
+    <p>Visi & Misi:</p>
+    <ul>
+        <li>Menyediakan produk berkualitas dengan harga bersaing</li>
+        <li>Melayani pelanggan dengan cepat dan ramah</li>
+        <li>Terus berinovasi mengikuti kebutuhan pelanggan</li>
+    </ul>
+</div>
+
+<footer>
+    <p>&copy; 2023 - 2026 GSS TEAM.</p>
+</footer>
+
+<script>
+// ===== PARTICLE EFFECT =====
+const canvas = document.getElementById('particle-canvas');
+const ctx = canvas.getContext('2d');
+
+let particlesArray;
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+window.addEventListener('resize', function() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    initParticles();
+});
+
+class Particle {
+    constructor(x, y, size, speedX, speedY) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speedX = speedX;
+        this.speedY = speedY;
+    }
+
+    update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+
+        if(this.x > canvas.width || this.x < 0) this.speedX = -this.speedX;
+        if(this.y > canvas.height || this.y < 0) this.speedY = -this.speedY;
+    }
+
+    draw() {
+        ctx.fillStyle = 'rgba(26, 188, 156, 0.8)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+        ctx.closePath();
+        ctx.fill();
+    }
+}
+
+function initParticles() {
+    particlesArray = [];
+    for(let i=0; i<80; i++){
+        let size = Math.random() * 3 + 1;
+        let x = Math.random() * canvas.width;
+        let y = Math.random() * canvas.height;
+        let speedX = (Math.random() - 0.5) * 1;
+        let speedY = (Math.random() - 0.5) * 1;
+        particlesArray.push(new Particle(x,y,size,speedX,speedY));
+    }
+}
+
+function animateParticles() {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particlesArray.forEach(p => {
+        p.update();
+        p.draw();
+    });
+    requestAnimationFrame(animateParticles);
+}
+
+initParticles();
+animateParticles();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,336 @@
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg1: #00040a;
+            --bg2: #020b12;
+            --text: #eafcff;
+
+            /* cold cyber blue */
+            --card1: rgba(0, 200, 255, .38);
+            --card2: rgba(0, 35, 70, .95);
+            --accent: #00d9ff;
+        }
+
+        body {
+            font-family: Poppins, sans-serif;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(0,200,255,.18), transparent 45%),
+                radial-gradient(circle at 80% 80%, rgba(0,180,255,.12), transparent 45%),
+                linear-gradient(160deg,var(--bg1),var(--bg2));
+            color: var(--text);
+            min-height: 100vh;
+            padding: 40px;
+            overflow-x: hidden;
+        }
+
+        #particles {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+        }
+
+        .glow {
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 30% 40%, rgba(0,217,255,.15), transparent 20%),
+                radial-gradient(circle at 70% 60%, rgba(0,180,255,.1), transparent 45%);
+            pointer-events: none;
+        }
+
+        .logo-top {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 18px;
+        }
+
+        .logo-top img {
+            width: 120px;
+            filter: drop-shadow(0 0 15px rgba(0,217,255,.8))
+                    drop-shadow(0 0 30px rgba(0,217,255,.6));
+            animation: logoPulse 3s infinite ease-in-out;
+        }
+
+        @keyframes logoPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+            100% { transform: scale(1); }
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 42px;
+            font-weight: 700;
+        }
+
+        .judul-putih {
+            color: #ffffff;
+        }
+
+        .judul-hijau {
+            color: var(--accent);
+            text-shadow:
+                0 0 10px rgba(0,217,255,.8),
+                0 0 35px rgba(0,217,255,1);
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+            gap: 26px;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .card {
+            background: linear-gradient(160deg, var(--card1), var(--card2));
+            border: 1px solid rgba(0, 217, 255, 0.7);
+            border-radius: 22px;
+            padding: 28px;
+            backdrop-filter: blur(14px);
+            transition: 0.35s;
+            box-shadow: 0 0 30px rgba(0, 217, 255, 0.35);
+        }
+
+        /* Kontainer tombol + harga */
+        .btn-container {
+            display: flex;
+            align-items: center;
+            gap: 20px; /* jarak tombol dan harga lebih longgar */
+            margin-top: 16px;
+        }
+
+        /* Harga di samping tombol */
+        .harga {
+            font-size: 18px;
+            font-weight: 700;
+            color: #00ffd9; /* hijau neon */
+            text-shadow: 0 0 5px #000, 0 0 15px #000;
+        }
+
+
+
+
+
+
+        .card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow:
+                0 30px 60px rgba(0,217,255,.2),
+                0 0 55px rgba(0,80,120,.95);
+        }
+
+        .card p {
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: #001018;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: .3s;
+            box-shadow: 0 0 25px rgba(0,217,255,.7);
+        }
+
+        .mc {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: #001018;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: .3s;
+            box-shadow: 0 0 25px rgba(0,217,255,.7);
+        }
+
+            .vip {
+            display: inline-block;
+            margin-top: 16px;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: #001018;
+            border-radius: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: .3s;
+            box-shadow: 0 0 25px rgba(0,217,255,.7);
+        }
+
+        .btn:hover {
+            background: #5feaff;
+            box-shadow: 0 0 40px rgba(0,217,255,1);
+        }
+
+        @media (max-width:768px) {
+            body { padding: 20px; }
+            h1 { font-size: 30px; }
+            .logo-top img { width: 95px; }
+        }
+
+
+        /* filevip */
+
+    /* ===========================
+    FORM CONTAINER
+    =========================== */
+    #productForm {
+        margin-top: 15px;
+        background: #002227;
+        padding: 20px;
+        border-radius: 10px;
+        display: none; /* Tampilkan dengan JS jika perlu */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        font-family: 'Arial', sans-serif;
+
+        /* Scrollable */
+        max-height: 400px; /* sesuaikan tinggi form */
+        overflow-y: auto;
+    }
+
+    /* Scrollbar custom untuk Webkit (Chrome, Edge, Safari) */
+    #productForm::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #productForm::-webkit-scrollbar-thumb {
+        background-color: #5feaff;
+        border-radius: 4px;
+    }
+
+    #productForm::-webkit-scrollbar-track {
+        background: #001818;
+        border-radius: 4px;
+    }
+
+    /* ===========================
+    LABEL STYLE
+    =========================== */
+    label[for="productSelect"] {
+        font-weight: bold;
+        font-size: 16px;
+        color: #ffffff;
+        margin-bottom: 8px;
+        display: block;
+    }
+
+    /* ===========================
+    SELECT BOX
+    =========================== */
+    #productSelect {
+        width: 100%;
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: 2px solid #ffffff;
+        font-size: 1rem;
+        margin-bottom: 10px;
+        background-color: #144e4e;
+        color: #fff;
+        transition: all 0.3s ease;
+        appearance: none; /* hilangkan arrow default */
+        background-image: url('data:image/svg+xml;utf8,<svg fill="%23ffffff" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 16px;
+        cursor: pointer;
+    }
+
+    /* Hover & focus effects untuk select */
+    #productSelect:hover {
+        border-color: #5feaff;
+    }
+    #productSelect:focus {
+        border-color: #5feaff;
+        box-shadow: 0 0 5px rgba(46, 213, 115, 0.5);
+        outline: none;
+    }
+
+    /* ===========================
+    PRICE DISPLAY
+    =========================== */
+    #priceDisplay {
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: #ffffff;
+        font-size: 1.1rem;
+    }
+
+    /* ===========================
+    CONFIRM BUTTON
+    =========================== */
+    #confirmBtn {
+        font-weight: bold;
+        font-size: 16px;
+        background: #00ddff;
+        box-shadow: 0 0 40px rgb(0, 129, 151);
+        border: none;
+        color: #000000;
+        padding: 12px 20px;
+        font-size: 1rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.3s, transform 0.2s;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    #confirmBtn:hover {
+        background: #7bed9f;
+        transform: scale(1.03);
+    }
+
+
+    #videoContainer {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    /* Rasio 16:9 */
+    padding-bottom: 56.25%; /* 9/16*100 */
+}
+
+#videoContainer video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#toast {
+    position: fixed;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 217, 255, 0.95);
+    color: #001018;
+    padding: 8px 14px;          /* lebih kecil */
+    border-radius: 10px;
+    font-size: 13px;            /* teks lebih kecil */
+    font-weight: 600;
+    max-width: 90%;             /* cegah melebar */
+    width: max-content;         /* mengikuti teks */
+    white-space: normal;        /* boleh turun baris */
+    text-align: center;
+    line-height: 1.4;
+    box-shadow: 0 0 15px rgba(0,217,255,0.6);
+    opacity: 0;
+    z-index: 9999;
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}

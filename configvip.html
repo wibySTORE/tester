@@ -1,0 +1,156 @@
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GSS TEAM VVIP</title>
+
+        <!-- GOOGLE FONT -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+        <!-- CSS EXTERNAL -->
+        <link rel="stylesheet" href="style.css">
+    </head>
+
+    <body>
+    <div id="toast">⚠️ SETIAP BARU MASUK LINK INI DI WAJIB KAN REFRESH DULU, SAPA TAU ADA PROMO!!</div>
+        <canvas id="particles"></canvas>
+
+        <h1>
+            <span class="judul-putih">GSS TEAM</span>
+            <span class="judul-hijau">VVIP</span>
+        </h1>
+
+        <div class="container">
+            <div class="card">
+                <h2>CONFIG FIX LAG VVIP</h2>
+                <p>File ini sangat direkomendasikan untuk kalian yang mengalami lag atau patah-patah saat bermain Free Fire. Optimalkan performa HP kalian dan rasakan gameplay yang lebih lancar!<br>
+            </div>
+
+            <div class="card">
+                <h4>📣 paket 1</h4>
+                <p>
+                • Stabilizer 25%<br>
+                • Optimasi Sinyal 20%<br>
+                •  Update File -<br>
+                </p>
+                <a class="vip" href="" target="_blank">BUY PAKET 1</a>
+                <span class="harga">Rp 25.000</span>
+                </div>
+
+                <div class="card">
+                <h4>📣 paket 2</h4>
+                <p>
+                • Stabilizer 30%<br>
+                • Optimasi Sinyal 25%<br>
+                • Auto 30 FPS<br>
+                • Update File -<br>
+                </p>
+                <a class="vip" href="" target="_blank">BUY PAKET 2</a>
+                <span class="harga">Rp 35.000</span>
+                </div>
+
+                <div class="card">
+                <h4>📣 paket 3</h4>
+                <p>
+                • Penghilang Lag 55%<br>
+                • Stabilizer 55%<br>
+                • Optimasi Sinyal 40%<br>
+                • Auto FPS 45<br>
+                • Update File -<br>
+                </p>
+                <a class="vip" href="" target="_blank">BUY PAKET 3</a>
+                <span class="harga">Rp 50.000</span>
+                </div>
+
+                <div class="card">
+                <h4>📣 paket 4</h4>
+                <p>
+                • Penghilang Lag 70%<br>
+                • Stabilizer 55%<br>
+                • Optimasi Sinyal 50%<br>
+                • Auto FPS 60<br>
+                • Update File (YES)<br>
+                </p>
+                <a class="vip" href="" target="_blank">BUY PAKET 4</a>
+                <span class="harga">Rp 65.000</span>
+                </div>
+
+
+                <div class="card">
+                <h4>📣 paket 5</h4>
+                <p>
+                • Penghilang Lag 90%<br>
+                • Stabilizer 75%<br>
+                • Optimasi Sinyal 65%<br>
+                • Auto FPS 90<br>
+                • Update File (YES)<br>
+                </p>
+                <a class="vip" href="" target="_blank">BUY PAKET 5</a>
+                <span class="harga">Rp 75.000</span>
+            </div>
+
+            <div class="card">
+                <h2>📞 ADMIN C1?</h2>
+                <p>Kalo Admin Centang 1 , Click Laporan</p>
+                <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
+
+                <br><br>
+
+                <h2>📨 SALURAN WHATSAPP</h2>
+                <p>Testimoni & Informasi Promo!</p>
+                <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
+            </div>
+
+        </div>
+
+        <script src="ganti nomor/config vip/p1.js"></script>
+    <script src="script.js"></script>
+
+        <script>
+
+
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        const particles = [];
+        for (let i = 0; i < 90; i++) {
+            particles.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 0.5,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+                color: Math.random() > 0.5
+                    ? "rgba(0,217,255,0.7)"
+                    : "rgba(255,255,255,0.4)"
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+        </script>
+
+
+    </body>
+    </html>
