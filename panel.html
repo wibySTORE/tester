@@ -1,14 +1,17 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GSS TEAM VVIP - Home</title>
+    <!DOCTYPE html>
+    <html lang="id">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GSS TEAM VVIP</title>
 
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+        <!-- GOOGLE FONT -->
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    <style>
+        <!-- CSS EXTERNAL -->
+        <link rel="stylesheet" href="style.css">
+
+            <style>
         /* Modal Overlay */
         .modal {
             display: none; /* sembunyi default */
@@ -89,55 +92,76 @@
             to { opacity: 1; transform: translateY(0); }
         }
     </style>
-</head>
-<body>
-    <canvas id="particles"></canvas>
+
+
+
+
+    </head>
+
+    <body>
+        <canvas id="particles"></canvas>
     <div id="toast">⚠️ SETIAP BARU MASUK LINK INI DI WAJIB KAN REFRESH DULU, SAPA TAU ADA PROMO!!</div>
 
-    <h1>
-        <span class="judul-putih">GSS TEAM</span>
-        <span class="judul-hijau">VVIP</span>
-    </h1>
+        <h1>
+            <span class="judul-putih">GSS TEAM</span>
+            <span class="judul-hijau">VVIP</span>
+        </h1>
 
-    <div class="container">
-        <!-- Card untuk Daftar Produk -->
-        <div class="card">
-            <h2>Selamat Datang</h2>
-            <p>Klik tombol di bawah untuk melihat daftar produk:</p>
-            <a class="btn" id="openModalBtn">Lihat Daftar Produk</a>
+        <div class="container">
+                <div class="card">
+                <h3>⚙ PANEL ANDRO NON ROOT / ROOT</h3>
+                <ul>
+                <li>Fiture :</li>
+                <li>AUTO HEADSHOT</li>
+                <li>AIMLOCK</li>
+                <li>AIM FOV</li>
+                <li>AIM NECK</li>
+                <li>BEBAS RULES ISIAN HIDE</li>
+                <li>NO ROOT & ROOT</li>
+            </ul>
+            <a href="vid.html" class="btn">Contoh Vidio Panel
+</a>
+
+            </div>
+
+<div class="card">
+    <!-- Form langsung terlihat tanpa tombol BUY CLICK -->
+    <label for="productSelect">Pilih varian:</label>
+    <select id="productSelect">
+        <option value="" data-price="0">pilih</option>
+        <option value="3 DAYS" data-price="50">3 DAYS - Rp 50K</option>
+        <option value="15 DAYS" data-price="100">15 DAYS - Rp 100K</option>
+        <option value="30 DAYS" data-price="200">30 DAYS - Rp 200K</option>
+        <option value="PANEL PERMANENT" data-price="350">PERMANENT - Rp 350K</option>
+
+
+    </select>
+    <p id="priceDisplay">Harga: -</p>
+    <button id="confirmBtn">ORDER NOW</button>
+</div>
+
+
+
+            <div class="card">
+                <h2>📞 ADMIN C1?</h2>
+                <p>Kalo Admin Centang 1 , Click Laporan</p>
+                <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
+
+                <br><br>
+
+                <h2>📨 SALURAN WHATSAPP</h2>
+                <p>Testimoni & Informasi Promo!</p>
+                <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
+            </div>
+
         </div>
 
-        <!-- Card untuk Admin -->
-        <div class="card">
-            <h2>📞 Admin C1?</h2>
-            <p>Kalo Admin Centang 1, klik laporan.</p>
-            <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
-        </div>
-
-        <!-- Card untuk Saluran WA -->
-        <div class="card">
-            <h2>📨 Saluran WhatsApp</h2>
-            <p>Testimoni & informasi promo!</p>
-            <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
-        </div>
-    </div>
-
-    <!-- MODAL -->
-    <div class="modal" id="pageModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModal">&times;</span>
-            <h2>Silahkan Pilih Bos</h2>
-            <a class="option-btn" href="configvip.html">Config Fix Lag Vip</a>
-            <a class="option-btn" href="filevip.html">File Vip</a>
-            <a class="option-btn" href="mc.html">File Minecraft</a>
-            <a class="option-btn1" href="about.html">INFROMASI</a>
-        </div>
-    </div>
-
-    <script src="ganti nomor/mc/no.js"></script>
+        <script src="ganti nomor/file vip/no.js"></script>
     <script src="script.js"></script>
-    <script>
-        // Partikel
+
+        <script>
+
+
         const canvas = document.getElementById("particles");
         const ctx = canvas.getContext("2d");
 
@@ -177,17 +201,32 @@
             requestAnimationFrame(draw);
         }
         draw();
+        </script>
 
-        // Modal
-        const modal = document.getElementById("pageModal");
-        const openBtn = document.getElementById("openModalBtn");
-        const closeBtn = document.getElementById("closeModal");
 
-        openBtn.addEventListener("click", () => modal.style.display = "flex");
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-        window.addEventListener("click", e => {
-            if(e.target === modal) modal.style.display = "none";
-        });
-    </script>
-</body>
-</html>
+        <script>
+            const openModalBtn = document.getElementById("openModalBtn");
+            const modal = document.getElementById("pageModal");
+            const closeModal = document.getElementById("closeModal");
+
+            // buka modal
+            openModalBtn.addEventListener("click", function () {
+                modal.style.display = "flex";
+            });
+
+            // tutup modal (klik X)
+            closeModal.addEventListener("click", function () {
+                modal.style.display = "none";
+            });
+
+            // tutup modal (klik area luar)
+            window.addEventListener("click", function (e) {
+                if (e.target === modal) {
+                    modal.style.display = "none";
+                }
+            });
+        </script>
+
+
+    </body>
+    </html>

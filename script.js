@@ -30,27 +30,30 @@ document.addEventListener("visibilitychange", function () {
         location.reload();
     }
 });
+    // Disable klik kanan
+    document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+        alert('Klik kanan dinonaktifkan!');
+    });
 
-// Event detect user kembali ke tab
-document.addEventListener("visibilitychange", function() {
-    if (document.visibilityState === "visible") {
-        refreshPageWithPopup();
-    }
-});
+    // Disable shortcut keyboard
+    document.addEventListener('keydown', function(e) {
+        // Ctrl + U
+        if (e.ctrlKey && e.key === 'u') {
+            e.preventDefault();
+            alert('View Source dinonaktifkan!');
+        }
 
-(function () {
-    // Cek apakah sudah pernah refresh di sesi ini
-    if (sessionStorage.getItem('alreadyRefreshed')) return;
+        // Ctrl + Shift + I / J / C (DevTools)
+        if (e.ctrlKey && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+            e.preventDefault();
+            alert('Developer Tools dinonaktifkan!');
+        }
 
-    // Fungsi refresh 1x
-    function refreshOnce() {
-        sessionStorage.setItem('alreadyRefreshed', 'true');
-        location.reload();
-    }
+        // F12
+        if (e.key === 'F12') {
+            e.preventDefault();
+            alert('Developer Tools dinonaktifkan!');
+        }
+    });
 
-    // Tangkap SEMUA klik di halaman
-    document.addEventListener('click', refreshOnce, { once: true });
-
-    // Opsional: tangkap sentuhan di HP
-    document.addEventListener('touchstart', refreshOnce, { once: true });
-})();
