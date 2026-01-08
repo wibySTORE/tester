@@ -30,7 +30,6 @@ document.addEventListener("visibilitychange", function () {
         location.reload();
     }
 });
-
     // Disable klik kanan
     document.addEventListener('contextmenu', function(e) {
         e.preventDefault();
@@ -57,5 +56,3 @@ document.addEventListener("visibilitychange", function () {
             alert('lu bukan developer gss team!');
         }
     });
-
-
