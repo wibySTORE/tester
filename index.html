@@ -88,6 +88,105 @@
             from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+/* =========================
+   REVIEW FORM - CYBER BLUE
+   ========================= */
+.review-form {
+    max-width: 420px;
+    margin: 60px auto;
+    padding: 25px;
+    background: linear-gradient(160deg, rgba(0,217,255,.18), rgba(0,35,70,.95));
+    border-radius: 18px;
+    border: 1px solid rgba(0,217,255,.6);
+    box-shadow:
+        0 0 30px rgba(0,217,255,.35),
+        inset 0 0 20px rgba(0,217,255,.15);
+    backdrop-filter: blur(14px);
+}
+
+.review-form h3 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #00d9ff;
+    font-weight: 700;
+    text-shadow: 0 0 15px rgba(0,217,255,.9);
+}
+
+/* INPUT, SELECT, TEXTAREA */
+.review-form input,
+.review-form textarea,
+.review-form select {
+    width: 100%;
+    margin: 8px 0;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(0, 20, 30, 0.85);
+    border: 1px solid rgba(0,217,255,.6);
+    color: #eafcff;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+/* PLACEHOLDER */
+.review-form input::placeholder,
+.review-form textarea::placeholder {
+    color: #8fdfff;
+}
+
+/* HOVER & FOCUS */
+.review-form input:focus,
+.review-form textarea:focus,
+.review-form select:focus {
+    border-color: #00d9ff;
+    box-shadow: 0 0 15px rgba(0,217,255,.8);
+    background: rgba(0,30,45,.95);
+}
+
+/* SELECT CUSTOM ARROW */
+.review-form select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%2300d9ff" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 16px;
+    cursor: pointer;
+}
+
+/* TEXTAREA */
+.review-form textarea {
+    min-height: 90px;
+    resize: none;
+}
+
+/* BUTTON */
+.review-form button {
+    width: 100%;
+    margin-top: 14px;
+    padding: 12px;
+    border-radius: 14px;
+    background: #00d9ff;
+    border: none;
+    font-size: 15px;
+    font-weight: 700;
+    color: #001018;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(0,217,255,.8);
+    transition: 0.3s;
+}
+
+/* BUTTON HOVER */
+.review-form button:hover {
+    background: #5feaff;
+    box-shadow:
+        0 0 40px rgba(0,217,255,1),
+        0 0 70px rgba(0,120,180,.8);
+    transform: translateY(-2px);
+}
+
+
+
     </style>
 </head>
 <body>
@@ -192,8 +291,67 @@
     </script>
 
 
-<section class="testimonial-section">
-    
+<script>
+function addReview() {
+    const name = document.getElementById("name").value;
+    const title = document.getElementById("title").value;
+    const rating = document.getElementById("rating").value;
+    const review = document.getElementById("review").value;
+
+    if (!name || !title || !review) {
+        alert("Lengkapi semua field!");
+        return;
+    }
+
+    let stars = "★★★★★☆☆☆☆☆".substring(5 - rating, 10 - rating);
+
+    const testimonial = `
+        <div class="testimonial-card">
+            <div class="testimonial-header">
+                <img src="img/10.jpg">
+                <div>
+                    <h4>${name}</h4>
+                    <span>${title}</span>
+                </div>
+            </div>
+            <div class="stars">${stars}</div>
+            <p>${review}</p>
+        </div>
+    `;
+
+    document.getElementById("testimonial-container")
+        .insertAdjacentHTML("afterbegin", testimonial);
+
+    // reset form
+    document.getElementById("name").value = "";
+    document.getElementById("title").value = "";
+    document.getElementById("review").value = "";
+}
+</script>
+
+
+    <div class="review-form">
+    <h3>Berikan Ulasan</h3>
+
+    <input type="text" id="name" placeholder="Nama" required>
+    <input type="text" id="title" placeholder="Status / Keterangan" required>
+
+    <select id="rating">
+        <option value="5">★★★★★</option>
+        <option value="4">★★★★☆</option>
+        <option value="3">★★★☆☆</option>
+        <option value="2">★★☆☆☆</option>
+        <option value="1">★☆☆☆☆</option>
+    </select>
+
+    <textarea id="review" placeholder="Tulis ulasan..." required></textarea>
+
+    <button onclick="addReview()">Kirim Ulasan</button>
+</div>
+
+
+<div id="testimonial-container">
+    <!-- testimonial-card lama kamu tetap di sini -->
 
     <div class="testimonial-card">
         <div class="testimonial-header">
@@ -328,10 +486,10 @@
 
 
 
+</div>
 </section>
 
 
 
 </body>
 </html>
-
