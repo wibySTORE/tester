@@ -7,8 +7,45 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    
 
     <style>
+
+        /* ===== VIDEO ===== */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .video-card {
+            padding: 15px;
+            border-radius: 15px;
+        }
+
+        .video-title {
+            text-align: center;
+            font-weight: 1000;
+            margin-bottom: 10px;
+        }
+
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%;
+        }
+
+        .video-wrapper video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+
         /* Modal Overlay */
         .modal {
             display: none; /* sembunyi default */
@@ -202,8 +239,8 @@
         <!-- Card untuk Daftar Produk -->
         <div class="card">
             <h2>Selamat Datang</h2>
-            <p>Klik tombol di bawah untuk melihat harga file gss:</p>
-            <a class="btn" id="openModalBtn">Lihat Daftar File</a>
+            <p>Klik tombol di bawah untuk melihat daftar produk:</p>
+            <a class="btn" id="openModalBtn">Lihat Daftar Produk</a>
         </div>
 
         <!-- Card untuk Admin -->
@@ -237,6 +274,13 @@
     <script src="ganti nomor/mc/no.js"></script>
     <script src="script.js"></script>
     <script>
+
+        function setSpeed(speed) {
+            document.getElementById("myVideo").playbackRate = speed;
+        }
+
+
+
         // Partikel
         const canvas = document.getElementById("particles");
         const ctx = canvas.getContext("2d");
@@ -288,7 +332,7 @@
         window.addEventListener("click", e => {
             if(e.target === modal) modal.style.display = "none";
         });
-    </script>
+</script>
 
 
 <script>
@@ -328,6 +372,20 @@ function addReview() {
     document.getElementById("review").value = "";
 }
 </script>
+
+
+
+<div class="video-container">
+
+    <div class="video-card">
+        <div class="video-title">CARA ORDER TONTON INI :</div>
+        <div class="video-wrapper">
+            <video controls controlsList="nodownload noplaybackrate"
+                disablePictureInPicture ondragstart="return false;">
+                <source src="video/tutor.MOV" type="video/mp4">
+            </video>
+        </div>
+    </div>
 
 
     <div class="review-form">
@@ -493,4 +551,3 @@ function addReview() {
 
 </body>
 </html>
-
