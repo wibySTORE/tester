@@ -25,7 +25,7 @@
             return;
         }
 
-        const phone = '6289524016619'; // ganti nomor WA tujuan
+        const phone = '6289518550441'; // ganti nomor WA tujuan
         const message = `Halo, saya ingin membeli ${product} seharga ${formatRupiah(price)}`;
         const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
