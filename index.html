@@ -12,6 +12,8 @@
     <style>
 
         /* ===== VIDEO ===== */
+
+
         .video-container {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -376,16 +378,21 @@ function addReview() {
 
 
 <div class="video-container">
-
     <div class="video-card">
         <div class="video-title">CARA ORDER TONTON INI :</div>
+
         <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/tutor.mp4" type="video/mp4">
-            </video>
+            <iframe
+                src="https://www.youtube.com/embed/szaRm8Y_qVA"
+                title="Cara Order"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
+</div>
+
 
 
     <div class="review-form">
@@ -551,4 +558,3 @@ function addReview() {
 
 </body>
 </html>
-

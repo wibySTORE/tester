@@ -68,6 +68,35 @@
             height: 100%;
             border-radius: 10px;
         }
+
+        .video-wrapper iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+}
+
+/* HP */
+@media (max-width: 768px) {
+    .video-container {
+        grid-template-columns: 1fr;
+        padding: 0 10px;
+    }
+
+    .video-title {
+        font-size: 14px;
+    }
+}
+
+/* PC */
+@media (min-width: 1024px) {
+    .video-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+
     </style>
 </head>
 
@@ -85,52 +114,50 @@
     <div class="video-card">
         <div class="video-title">AIMLOCK 100%</div>
         <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/AIMLOCK TESTI.mp4" type="video/mp4">
-            </video>
+            <iframe
+                src="https://www.youtube.com/embed/42gYseGVy64"
+                title="AIMLOCK 100%"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
     <div class="video-card">
-        <div class="video-title">BODY LOCK</div>
+        <div class="video-title">BODYLOCK</div>
         <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/BODY LOCK.mp4" type="video/mp4">
-            </video>
+            <iframe
+                src="https://www.youtube.com/embed/vUwVPUO1DT4"
+                title="BODYLOCK"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
     <div class="video-card">
         <div class="video-title">BODY HS</div>
         <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/BODY HS.mp4" type="video/mp4">
-            </video>
+            <iframe
+                src="https://www.youtube.com/embed/-lmOznsNWr0"
+                title="BODY HS"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
     <div class="video-card">
         <div class="video-title">DRAG HS 95%</div>
         <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/drag hs.mp4" type="video/mp4">
-            </video>
+            <iframe
+                src="https://www.youtube.com/embed/XhhxpPhHtTA"
+                title="DRAG HS 95%"
+                allowfullscreen>
+            </iframe>
         </div>
     </div>
 
-        <div class="video-card">
-        <div class="video-title">FILE TEMBUS</div>
-        <div class="video-wrapper">
-            <video controls controlsList="nodownload noplaybackrate"
-                disablePictureInPicture ondragstart="return false;">
-                <source src="video/TEMBUS.mp4" type="video/mp4">
-            </video>
-        </div>
-    </div>
+</div>
+
+
 
 </div>
 
@@ -191,5 +218,3 @@
 
 </body>
 </html>
-
-
