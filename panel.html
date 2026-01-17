@@ -1,117 +1,105 @@
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GSS TEAM VVIP</title>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSS TEAM VVIP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* CSS tetap sama */
+        #priceDisplay { font-weight: bold; color: #00d9ff; margin: 10px 0; }
+        .card ul { text-align: left; display: inline-block; margin-bottom: 15px; }
+        #particles { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
 
-        <!-- CSS EXTERNAL -->
-        <link rel="stylesheet" href="style.css">
+/* Atur Box Sizing agar padding tidak merusak lebar */
+* {
+    box-sizing: border-box;
+}
 
-            <style>
-        /* Modal Overlay */
-        .modal {
-            display: none; /* sembunyi default */
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            backdrop-filter: blur(5px);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
+/* Container Utama: Berjajar di PC, Menumpuk di Android */
+.container, #testimonial-container {
+    display: grid;
+    /* Di PC: Minimal 300px per kartu. Di Android: Otomatis 1 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
 
-        .modal-content {
-            background: linear-gradient(160deg, rgba(0,200,255,.38), rgba(0,35,70,.95));
-            border-radius: 16px;
-            padding: 30px;
-            width: 90%;
-            max-width: 400px;
-            text-align: center;
-            box-shadow: 0 0 30px rgba(0,217,255,0.5);
-            animation: fadeIn 0.3s ease;
-        }
+/* Card agar ukurannya pas di layar Android yang sempit */
+.card, .testimonial-card, .review-form {
+    width: 100%; /* Mengikuti lebar layar */
+    margin-bottom: 10px;
+    padding: 20px;
+    word-wrap: break-word; /* Mencegah teks keluar dari box */
+}
 
-        .modal h2 {
-            color: #fff;
-            margin-bottom: 20px;
-        }
+/* Video agar tetap 16:9 di Android */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
 
-        .modal .option-btn {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #001018;
-            background: #00d9ff;
-            border-radius: 12px;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(0,217,255,0.7);
-            transition: 0.3s;
-        }
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
 
-                .modal .option-btn1 {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            color: #ff0000;
-            background: #022025;
-            border-radius: 12px;
-            text-decoration: none;
-            box-shadow: 0 0 25px rgba(0,217,255,0.7);
-            transition: 0.3s;
-        }
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
 
-        .modal .option-btn:hover {
-            background: #5feaff;
-            box-shadow: 0 0 40px rgba(0,217,255,1);
-        }
+/* Media Query Khusus Android (Layar Kecil) */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Ukuran judul lebih kecil di HP */
+    }
+    
+    .modal-content {
+        width: 95%; /* Modal hampir full layar di HP */
+        padding: 20px 15px;
+    }
 
-        .close-btn {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 24px;
-            color: #fff;
-            cursor: pointer;
-        }
+    .option-btn, .option-btn1 {
+        font-size: 14px;
+        padding: 10px;
+    }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+    /* Hilangkan animasi partikel jika berat di Android jadul (Opsional) */
+    #particles {
+        opacity: 0.5;
+    }
+}
+
     </style>
+</head>
 
-
-
-
-    </head>
-
-    <body>
-        <canvas id="particles"></canvas>
+<body>
+    <canvas id="particles"></canvas>
     <div id="toast">⚠️ SETIAP BARU MASUK LINK INI DI WAJIB KAN REFRESH DULU, SAPA TAU ADA PROMO!!</div>
 
-        <h1>
-            <span class="judul-putih">GSS TEAM</span>
-            <span class="judul-hijau">VVIP</span>
-        </h1>
+    <h1>
+        <span class="judul-putih">GSS TEAM</span>
+        <span class="judul-hijau">VVIP</span>
+    </h1>
 
-        <div class="container">
-                <div class="card">
-                <h3>⚙ PANEL ANDRO NON ROOT / ROOT</h3>
-                <ul>
-                <li>Fiture :</li>
+    <div class="container">
+        <div class="card">
+            <h3>⚙️ PANEL ANDRO NON ROOT / ROOT</h3>
+            <ul>
                 <li>AUTO HEADSHOT</li>
                 <li>AIMLOCK</li>
                 <li>AIM FOV</li>
@@ -119,80 +107,89 @@
                 <li>BEBAS RULES ISIAN HIDE</li>
                 <li>NO ROOT & ROOT</li>
             </ul>
-            <a href="vpanel.html" class="btn">Contoh Vidio Panel
-</a>
-
-            </div>
-
-<div class="card">
-    <!-- Form langsung terlihat tanpa tombol BUY CLICK -->
-    <label for="productSelect">Pilih varian:</label>
-    <select id="productSelect">
-        <option value="" data-price="0">pilih</option>
-        <option value="3 DAYS" data-price="50">3 DAYS - Rp 50K</option>
-        <option value="15 DAYS" data-price="100">15 DAYS - Rp 100K</option>
-        <option value="30 DAYS" data-price="200">30 DAYS - Rp 200K</option>
-        <option value="PANEL PERMANENT" data-price="350">PERMANENT - Rp 350K</option>
-
-
-    </select>
-    <p id="priceDisplay">Harga: -</p>
-    <button id="confirmBtn">ORDER NOW</button>
-</div>
-
-
-
-            <div class="card">
-                <h2>📞 ADMIN C1?</h2>
-                <p>Kalo Admin Centang 1 , Click Laporan</p>
-                <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
-
-                <br><br>
-
-                <h2>📨 SALURAN WHATSAPP</h2>
-                <p>Testimoni & Informasi Promo!</p>
-                <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
-            </div>
-
+            <br>
+            <a href="vpanel.html" class="btn">Contoh Vidio Panel</a>
         </div>
 
-        <!-- <script src="ganti nomor/file vip/no.js"></script> -->
-    <script src="script.js"></script>
-        <script src="ganti nomor/file vip/no.js"></script>
+        <div class="card">
+            <label for="productSelect">Pilih varian:</label>
+            <select id="productSelect">
+                <option value="" data-price="0">pilih</option>
+                <option value="3 DAYS" data-price="50">3 DAYS - Rp 50K</option>
+                <option value="15 DAYS" data-price="100">15 DAYS - Rp 100K</option>
+                <option value="30 DAYS" data-price="200">30 DAYS - Rp 200K</option>
+                <option value="PANEL PERMANENT" data-price="350">PERMANENT - Rp 350K</option>
+            </select>
+            <p id="priceDisplay">Harga: -</p>
+            <button id="confirmBtn" class="btn" style="width: 100%; cursor: pointer;">ORDER NOW</button>
+        </div>
 
+        <div class="card">
+            <h2>📞 ADMIN C1?</h2>
+            <p>Kalo Admin Centang 1 , Click Laporan</p>
+            <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
+            <br><br>
+            <h2>📨 SALURAN WHATSAPP</h2>
+            <p>Testimoni & Informasi Promo!</p>
+            <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
+        </div>
+    </div>
 
-        <script>
+    <script>
+        // --- 1. LOGIKA PILIH PRODUK & PINDAH HALAMAN (SUDAH DIPERBAIKI) ---
+        const productSelect = document.getElementById('productSelect');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const confirmBtn = document.getElementById('confirmBtn');
 
+        productSelect.addEventListener('change', function() {
+            const price = this.options[this.selectedIndex].getAttribute('data-price');
+            if (price > 0) {
+                // Menyamakan format tampilan harga (Rp 50.000)
+                priceDisplay.innerText = "Harga: Rp " + (price * 1000).toLocaleString('id-ID');
+            } else {
+                priceDisplay.innerText = "Harga: -";
+            }
+        });
 
+        confirmBtn.addEventListener('click', function() {
+            const selectedVarian = productSelect.value;
+            const selectedPrice = productSelect.options[productSelect.selectedIndex].getAttribute('data-price');
+
+            if (!selectedVarian || selectedPrice === "0") {
+                alert("Silakan pilih varian terlebih dahulu!");
+                return;
+            }
+
+            // PERBAIKAN DISINI: Nama key disamakan agar QRIS terbaca
+            localStorage.setItem('pesanan_produk', selectedVarian);
+            localStorage.setItem('pesanan_harga', selectedPrice);
+
+            window.location.href = "order.html";
+        });
+
+        // --- 2. LOGIKA PARTICLES ---
         const canvas = document.getElementById("particles");
         const ctx = canvas.getContext("2d");
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener("resize", resize);
         resize();
 
-        const particles = [];
+        const particlesArr = [];
         for (let i = 0; i < 90; i++) {
-            particles.push({
+            particlesArr.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 r: Math.random() * 2 + 0.5,
                 dx: (Math.random() - 0.5) * 0.4,
                 dy: (Math.random() - 0.5) * 0.4,
-                color: Math.random() > 0.5
-                    ? "rgba(0,217,255,0.7)"
-                    : "rgba(255,255,255,0.4)"
+                color: Math.random() > 0.5 ? "rgba(0,217,255,0.7)" : "rgba(255,255,255,0.4)"
             });
         }
 
-        function draw() {
+        function animate() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.dx;
-                p.y += p.dy;
+            particlesArr.forEach(p => {
+                p.x += p.dx; p.y += p.dy;
                 if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
                 if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
                 ctx.beginPath();
@@ -200,35 +197,10 @@
                 ctx.fillStyle = p.color;
                 ctx.fill();
             });
-            requestAnimationFrame(draw);
+            requestAnimationFrame(animate);
         }
-        draw();
-        </script>
-
-
-        <script>
-            const openModalBtn = document.getElementById("openModalBtn");
-            const modal = document.getElementById("pageModal");
-            const closeModal = document.getElementById("closeModal");
-
-            // buka modal
-            openModalBtn.addEventListener("click", function () {
-                modal.style.display = "flex";
-            });
-
-            // tutup modal (klik X)
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
-            });
-
-            // tutup modal (klik area luar)
-            window.addEventListener("click", function (e) {
-                if (e.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
-        </script>
-
-
-    </body>
-    </html>
+        animate();
+    </script>
+    <script src="anticolong.js"></script>
+</body>
+</html>

@@ -11,6 +11,77 @@
 
     <style>
 
+        /* Atur Box Sizing agar padding tidak merusak lebar */
+* {
+    box-sizing: border-box;
+}
+
+/* Container Utama: Berjajar di PC, Menumpuk di Android */
+.container, #testimonial-container {
+    display: grid;
+    /* Di PC: Minimal 300px per kartu. Di Android: Otomatis 1 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Card agar ukurannya pas di layar Android yang sempit */
+.card, .testimonial-card, .review-form {
+    width: 100%; /* Mengikuti lebar layar */
+    margin-bottom: 10px;
+    padding: 20px;
+    word-wrap: break-word; /* Mencegah teks keluar dari box */
+}
+
+/* Video agar tetap 16:9 di Android */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Query Khusus Android (Layar Kecil) */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Ukuran judul lebih kecil di HP */
+    }
+    
+    .modal-content {
+        width: 95%; /* Modal hampir full layar di HP */
+        padding: 20px 15px;
+    }
+
+    .option-btn, .option-btn1 {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Hilangkan animasi partikel jika berat di Android jadul (Opsional) */
+    #particles {
+        opacity: 0.5;
+    }
+}
+
         /* ===== VIDEO ===== */
 
 
@@ -269,7 +340,7 @@
             <a class="option-btn" href="panel.html">Panel FF</a>
             <a class="option-btn" href="filevip.html">File Vip</a>
             <a class="option-btn" href="mc.html">File Minecraft</a>
-            <a class="option-btn1" href="about.html">INFROMASI</a>
+            <a class="option-btn1" href="about.html">INFORMASI</a>
         </div>
     </div>
 
@@ -324,16 +395,29 @@
         }
         draw();
 
-        // Modal
-        const modal = document.getElementById("pageModal");
-        const openBtn = document.getElementById("openModalBtn");
-        const closeBtn = document.getElementById("closeModal");
+// 1. LOGIKA MODAL (DIBENARKAN)
+    const modal = document.getElementById("pageModal");
+    const openBtn = document.getElementById("openModalBtn");
+    const closeBtn = document.getElementById("closeModal");
 
-        openBtn.addEventListener("click", () => modal.style.display = "flex");
-        closeBtn.addEventListener("click", () => modal.style.display = "none");
-        window.addEventListener("click", e => {
-            if(e.target === modal) modal.style.display = "none";
-        });
+    // Buka Modal
+    openBtn.onclick = function(e) {
+        // e.preventDefault() hanya untuk tombol buka modal, bukan link di dalamnya
+        e.preventDefault(); 
+        modal.style.display = "flex";
+    }
+
+    // Tutup Modal
+    closeBtn.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Tutup Modal Klik Luar
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 
 
@@ -383,7 +467,7 @@ function addReview() {
 
         <div class="video-wrapper">
             <iframe
-                src="https://www.youtube.com/embed/szaRm8Y_qVA"
+                src="https://www.youtube.com/embed/6kJDOnwbJjg"
                 title="Cara Order"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -392,6 +476,7 @@ function addReview() {
         </div>
     </div>
 </div>
+
 
 
 

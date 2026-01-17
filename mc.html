@@ -1,20 +1,89 @@
-        <!DOCTYPE html>
-        <html lang="id">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>GSS TEAM VVIP</title>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSS TEAM VVIP</title>
 
-            <!-- GOOGLE FONT -->
-            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-            <!-- CSS EXTERNAL -->
-            <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
 
-                <style>
+    <style>
+
+        /* Atur Box Sizing agar padding tidak merusak lebar */
+* {
+    box-sizing: border-box;
+}
+
+/* Container Utama: Berjajar di PC, Menumpuk di Android */
+.container, #testimonial-container {
+    display: grid;
+    /* Di PC: Minimal 300px per kartu. Di Android: Otomatis 1 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Card agar ukurannya pas di layar Android yang sempit */
+.card, .testimonial-card, .review-form {
+    width: 100%; /* Mengikuti lebar layar */
+    margin-bottom: 10px;
+    padding: 20px;
+    word-wrap: break-word; /* Mencegah teks keluar dari box */
+}
+
+/* Video agar tetap 16:9 di Android */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Query Khusus Android (Layar Kecil) */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Ukuran judul lebih kecil di HP */
+    }
+    
+    .modal-content {
+        width: 95%; /* Modal hampir full layar di HP */
+        padding: 20px 15px;
+    }
+
+    .option-btn, .option-btn1 {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Hilangkan animasi partikel jika berat di Android jadul (Opsional) */
+    #particles {
+        opacity: 0.5;
+    }
+}
         /* Modal Overlay */
         .modal {
-            display: none; /* sembunyi default */
+            display: none; 
             position: fixed;
             top: 0;
             left: 0;
@@ -58,7 +127,7 @@
             transition: 0.3s;
         }
 
-                .modal .option-btn1 {
+        .modal .option-btn1 {
             display: block;
             width: 100%;
             margin: 10px 0;
@@ -92,58 +161,48 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-    .video-title {
-        text-align: center;
-        font-weight: 600;
-        margin-bottom: 10px;
-    }
+        .video-title {
+            text-align: center;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
 
-    .video-wrapper {
-        position: relative;
-        width: 100%;
-        padding-top: 56.25%; /* 16:9 */
-    }
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 */
+        }
 
-    .video-wrapper iframe {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 12px;
-    }
-
-
+        .video-wrapper iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 12px;
+        }
     </style>
-
-
-        </head>
-        <body>
+</head>
+<body>
     <div id="toast">⚠️ SETIAP BARU MASUK LINK INI DI WAJIB KAN REFRESH DULU, SAPA TAU ADA PROMO!!</div>
 
+    <canvas id="particles"></canvas>
+    <div class="glow"></div>
+    <h1>
+        <span class="judul-putih">GSS TEAM</span>
+        <span class="judul-hijau">VVIP</span>
+    </h1>
 
-            <!-- Partikel Background -->
-            <canvas id="particles"></canvas>
-            <div class="glow"></div>
-            <h1>
-                <span class="judul-putih">GSS TEAM</span>
-                <span class="judul-hijau">VVIP</span>
-            </h1>
+    <div class="container">
 
-            <!-- Kontainer Card -->
-            <div class="container">
-
-                <!-- Card Info -->
-                <div class="card">
-                    <h3>🎮 Free Fire ala Minecraft! 🎮</h3>
-                    <p>
-                        Ubah tampilan Free Fire-mu menjadi grafis 8-bit ala Minecraft. Ringan, mudah dipasang, dan bikin permainanmu terasa unik dan seru!
-                    </p>
-                </div>
-
+        <div class="card">
+            <h3>🎮 Free Fire ala Minecraft! 🎮</h3>
+            <p>
+                Ubah tampilan Free Fire-mu menjadi grafis 8-bit ala Minecraft. Ringan, mudah dipasang, dan bikin permainanmu terasa unik dan seru!
+            </p>
+        </div>
 
         <div class="card1">
             <div class="video-title">CONTOH MINECRAFT</div>
-
             <div class="video-wrapper">
                 <iframe
                     src="https://www.youtube.com/embed/O8EscgkxYAo"
@@ -155,113 +214,107 @@
             </div>
         </div>
 
-
-                    
-                    
-                            <div class="card">
-                            <!-- Form langsung terlihat tanpa tombol BUY CLICK -->
+        <div class="card">
             <label for="productSelect">Pilih produk:</label>
             <select id="productSelect">
-                <option value="" data-price="0">sesuaikan devices</option>
+                <option value="" data-price="0">-- Sesuaikan Devices --</option>
                 <option value="MC Android 8-10" data-price="80">MC Android 8-10 - Rp 80K</option>
                 <option value="MC Android 11-15" data-price="100">MC Android 11-15 - Rp 100K</option>
+            </select>
+
+            <p id="priceDisplay">Harga: -</p>
+            <button id="confirmBtn" class="btn">ORDER NOW</button>
         </div>
 
-    </select>
-    <p id="priceDisplay">Harga: -</p>
-    <button id="confirmBtn">ORDER NOW</button>
-</div>
-
-        <!-- Card untuk Admin -->
         <div class="card">
             <h2>📞 Admin C1?</h2>
             <p>Kalo Admin Centang 1, klik laporan.</p>
             <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
         </div>
 
-        <!-- Card untuk Saluran WA -->
         <div class="card">
             <h2>📨 Saluran WhatsApp</h2>
             <p>Testimoni & informasi promo!</p>
             <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
         </div>
     </div>
-                </div>
 
-            </div>
+    <script>
+        // --- PERBAIKAN LOGIKA ORDER ---
+        const productSelect = document.getElementById('productSelect');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const confirmBtn = document.getElementById('confirmBtn');
 
-            <!-- Form Produk (Jika diperlukan) -->
-            <div id="productForm">
-                <label for="productSelect">Pilih Produk:</label>
-                <select id="productSelect">
-                    <option value="ff_minecraft">Free Fire ala Minecraft</option>
-                    <option value="vip_package">Paket VIP</option>
-                </select>
-                <div id="priceDisplay">Harga: Rp0</div>
-                <button id="confirmBtn">Konfirmasi</button>
-                
-            </div>
+        productSelect.addEventListener('change', () => {
+            const selected = productSelect.selectedOptions[0];
+            const price = selected.getAttribute('data-price');
+            
+            if (price && price !== "0") {
+                priceDisplay.innerText = "Harga: Rp " + (price * 1000).toLocaleString('id-ID');
+            } else {
+                priceDisplay.innerText = "Harga: -";
+            }
+        });
 
-    <script src="script.js"></script>
-    <script src="ganti nomor/file vip/no.js"></script>
+        confirmBtn.addEventListener('click', () => {
+            const product = productSelect.value;
+            const price = productSelect.selectedOptions[0].getAttribute('data-price');
 
+            if (!product || price === "0") {
+                alert('Pilih produk terlebih dahulu!');
+                return;
+            }
 
-            <!-- Script Proteksi Video -->
-            <script>
-                // Matikan klik kanan
-                document.addEventListener('contextmenu', function(e) {
-                    e.preventDefault();
-                    alert("Download video tidak diperbolehkan!");
-                });
+            localStorage.setItem('pesanan_produk', product);
+            localStorage.setItem('pesanan_harga', price);
+            window.location.href = "order.html";
+        });
 
-                // Cegah drag & drop
-                const video = document.getElementById('myVideo');
-                video.ondragstart = () => false;
-            </script>
+        // --- PROTEKSI VIDEO ---
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            alert("Download video tidak diperbolehkan!");
+        });
 
-            <!-- Script Partikel -->
-            <script>
-                const canvas = document.getElementById("particles");
-                const ctx = canvas.getContext("2d");
+        // --- SCRIPT PARTIKEL ---
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
 
-                function resize() {
-                    canvas.width = window.innerWidth;
-                    canvas.height = window.innerHeight;
-                }
-                window.addEventListener("resize", resize);
-                resize();
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
 
-                const particles = [];
-                for (let i = 0; i < 90; i++) {
-                    particles.push({
-                        x: Math.random() * canvas.width,
-                        y: Math.random() * canvas.height,
-                        r: Math.random() * 2 + 0.5,
-                        dx: (Math.random() - 0.5) * 0.4,
-                        dy: (Math.random() - 0.5) * 0.4,
-                        color: Math.random() > 0.5
-                            ? "rgba(0,217,255,0.7)"
-                            : "rgba(255,255,255,0.4)"
-                    });
-                }
+        const particlesArr = [];
+        for (let i = 0; i < 90; i++) {
+            particlesArr.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                r: Math.random() * 2 + 0.5,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+                color: Math.random() > 0.5 ? "rgba(0,217,255,0.7)" : "rgba(255,255,255,0.4)"
+            });
+        }
 
-                function draw() {
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    particles.forEach(p => {
-                        p.x += p.dx;
-                        p.y += p.dy;
-                        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particlesArr.forEach(p => {
+                p.x += p.dx;
+                p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
 
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                        ctx.fillStyle = p.color;
-                        ctx.fill();
-                    });
-                    requestAnimationFrame(draw);
-                }
-                draw();
-            </script>
-
-        </body>
-        </html>
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

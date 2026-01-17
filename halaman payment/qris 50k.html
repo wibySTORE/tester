@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <title>Konfirmasi Pesanan</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; padding-top: 50px; }
+        .box { border: 2px solid #28a745; padding: 30px; border-radius: 15px; text-align: center; }
+        .highlight { font-size: 1.5em; color: #28a745; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>Detail Pesanan Anda</h2>
+    <hr>
+    <p>Anda telah memilih produk:</p>
+    <p id="res-product" class="highlight">-</p>
+    <p>Total yang harus dibayar:</p>
+    <p id="res-price" class="highlight">-</p>
+    <br>
+    <button onclick="history.back()">Kembali Pilih Lagi</button>
+</div>
+
+<script>
+    // 1. Ambil data dari URL
+    const params = new URLSearchParams(window.location.search);
+    const namaProduk = params.get('item');
+    const hargaProduk = params.get('price');
+
+    // 2. Fungsi format rupiah
+    function formatRupiah(angka) {
+        return 'Rp ' + Number(angka * 1000).toLocaleString('id-ID'); 
+    }
+
+    // 3. Tampilkan ke halaman
+    if(namaProduk && hargaProduk) {
+        document.getElementById('res-product').innerText = namaProduk;
+        document.getElementById('res-price').innerText = formatRupiah(hargaProduk);
+    } else {
+        document.body.innerHTML = "<h1>Data tidak ditemukan!</h1>";
+    }
+</script>
+
+</body>
+</html>

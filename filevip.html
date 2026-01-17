@@ -10,8 +10,80 @@
 
         <!-- CSS EXTERNAL -->
         <link rel="stylesheet" href="style.css">
+        
 
             <style>
+
+                /* Atur Box Sizing agar padding tidak merusak lebar */
+* {
+    box-sizing: border-box;
+}
+
+/* Container Utama: Berjajar di PC, Menumpuk di Android */
+.container, #testimonial-container {
+    display: grid;
+    /* Di PC: Minimal 300px per kartu. Di Android: Otomatis 1 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Card agar ukurannya pas di layar Android yang sempit */
+.card, .testimonial-card, .review-form {
+    width: 100%; /* Mengikuti lebar layar */
+    margin-bottom: 10px;
+    padding: 20px;
+    word-wrap: break-word; /* Mencegah teks keluar dari box */
+}
+
+/* Video agar tetap 16:9 di Android */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Query Khusus Android (Layar Kecil) */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Ukuran judul lebih kecil di HP */
+    }
+    
+    .modal-content {
+        width: 95%; /* Modal hampir full layar di HP */
+        padding: 20px 15px;
+    }
+
+    .option-btn, .option-btn1 {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Hilangkan animasi partikel jika berat di Android jadul (Opsional) */
+    #particles {
+        opacity: 0.5;
+    }
+}
         /* Modal Overlay */
         .modal {
             display: none; /* sembunyi default */
@@ -127,7 +199,6 @@
             </div>
 
 <div class="card">
-    <!-- Form langsung terlihat tanpa tombol BUY CLICK -->
     <label for="productSelect">Pilih produk:</label>
     <select id="productSelect">
         <option value="" data-price="0">☠️ LIST BEST SELLER ☠️</option>
@@ -143,13 +214,43 @@
         <option value="" data-price="0">📂 FILE VISUAL 📂</option>
         <option value="HOLOGRAM SG" data-price="50">HOLOGRAM SG - Rp 50K</option>
         <option value="HOLOGRAM BADAN" data-price="50">HOLOGRAM BADAN - Rp 50K</option>
-        <option value="TEMBUS" data-price="100">TEMBUS - Rp 100K</option>
-        
-        
     </select>
     <p id="priceDisplay">Harga: -</p>
     <button id="confirmBtn">ORDER NOW</button>
 </div>
+
+<script>
+    const productSelect = document.getElementById('productSelect');
+    const priceDisplay = document.getElementById('priceDisplay');
+    const confirmBtn = document.getElementById('confirmBtn');
+
+    function formatRupiah(angka) {
+        return 'Rp ' + Number(angka * 1000).toLocaleString('id-ID'); 
+    }
+
+    productSelect.addEventListener('change', () => {
+        const selectedOption = productSelect.selectedOptions[0];
+        const price = selectedOption.getAttribute('data-price');
+        priceDisplay.innerText = price && price !== "0" ? `Harga: ${formatRupiah(price)}` : "Harga: -";
+    });
+
+    confirmBtn.addEventListener('click', () => {
+        const product = productSelect.value;
+        const price = productSelect.selectedOptions[0].getAttribute('data-price');
+
+        if(!product || price === "0"){
+            alert('Pilih produk terlebih dahulu!');
+            return;
+        }
+
+        // SIMPAN DATA KE MEMORI BROWSER (LocalStorage)
+        localStorage.setItem('pesanan_produk', product);
+        localStorage.setItem('pesanan_harga', price);
+
+        // PINDAH KE HALAMAN order.html
+        window.location.href = "order.html";
+    });
+</script>
 
 
 
@@ -170,75 +271,8 @@
         <script src="ganti nomor/file vip/no.js"></script>
     <script src="script.js"></script>
 
-        <script>
 
-
-        const canvas = document.getElementById("particles");
-        const ctx = canvas.getContext("2d");
-
-        function resize() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener("resize", resize);
-        resize();
-
-        const particles = [];
-        for (let i = 0; i < 90; i++) {
-            particles.push({
-                x: Math.random() * canvas.width,
-                y: Math.random() * canvas.height,
-                r: Math.random() * 2 + 0.5,
-                dx: (Math.random() - 0.5) * 0.4,
-                dy: (Math.random() - 0.5) * 0.4,
-                color: Math.random() > 0.5
-                    ? "rgba(0,217,255,0.7)"
-                    : "rgba(255,255,255,0.4)"
-            });
-        }
-
-        function draw() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.dx;
-                p.y += p.dy;
-                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.fill();
-            });
-            requestAnimationFrame(draw);
-        }
-        draw();
-        </script>
-
-
-        <script>
-            const openModalBtn = document.getElementById("openModalBtn");
-            const modal = document.getElementById("pageModal");
-            const closeModal = document.getElementById("closeModal");
-
-            // buka modal
-            openModalBtn.addEventListener("click", function () {
-                modal.style.display = "flex";
-            });
-
-            // tutup modal (klik X)
-            closeModal.addEventListener("click", function () {
-                modal.style.display = "none";
-            });
-
-            // tutup modal (klik area luar)
-            window.addEventListener("click", function (e) {
-                if (e.target === modal) {
-                    modal.style.display = "none";
-                }
-            });
-        </script>
 
 
     </body>
     </html>
-

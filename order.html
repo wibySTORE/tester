@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembayaran QRIS - GSS TEAM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppins', sans-serif; background: #0f172a; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; color: white; overflow-x: hidden; }
+        #particles { position: fixed; top: 0; left: 0; z-index: -1; width: 100%; height: 100%; }
+        .detail-box { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(10px); padding: 25px; border-radius: 25px; box-shadow: 0 20px 50px rgba(0,0,0,0.5); width: 90%; max-width: 380px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.1); z-index: 10; margin: 20px 0; }
+        h2 { margin: 0 0 15px 0; color: #00ff87; font-weight: 800; font-size: 20px; }
+        .qris-container { background: white; padding: 10px; border-radius: 20px; margin-bottom: 15px; display: inline-block; }
+        .qris-container img { width: 200px; height: auto; display: block; border-radius: 10px; }
+        .info-pembayaran { background: rgba(0,0,0,0.3); padding: 12px; border-radius: 15px; margin-bottom: 15px; text-align: left; border-left: 4px solid #00ff87; }
+        .item-price { font-size: 24px; font-weight: 800; color: #00ff87; }
+        .upload-section { background: rgba(255, 255, 255, 0.05); border: 2px dashed #00ff87; padding: 15px; border-radius: 15px; margin-bottom: 15px; }
+        .upload-section p { font-size: 11px; margin-bottom: 8px; color: #00ff87; font-weight: 600; }
+        .nominal-input { width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: 1px solid #00ff87; background: rgba(0,0,0,0.2); color: white; font-weight: bold; text-align: center; box-sizing: border-box; }
+        #previewContainer { display: none; margin-top: 10px; }
+        #imgPreview { width: 100%; max-height: 120px; object-fit: contain; border-radius: 8px; border: 1px solid #00ff87; }
+        .btn-confirm { width: 100%; padding: 15px; background: #25d366; color: white; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 16px; }
+        .btn-confirm:disabled { background: #4b5563; opacity: 0.4; cursor: not-allowed; }
+        .status-msg { font-size: 10px; margin-top: 8px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <canvas id="particles"></canvas>
+
+    <div class="detail-box">
+        <h2>VALIDASI PEMBAYARAN</h2>
+        
+        <div class="info-pembayaran">
+            <div id="namaProduk" style="font-size: 12px; color: #cbd5e1;">-</div>
+            <div id="hargaProduk" class="item-price">-</div>
+            <p style="font-size: 10px; margin: 5px 0 0 0; color: #aaa;">*Pastikan transfer sesuai nominal di atas!</p>
+        </div>
+
+        <div class="qris-container">
+            <img id="qrisImage" src="" alt="QRIS">
+        </div>
+
+        <script src="https://unpkg.com/tesseract.js@v2.1.0/dist/tesseract.min.js"></script>
+
+        <div class="upload-section">
+            <p>1. INPUT NOMINAL TRANSFER (ANGKA SAJA):</p>
+            <input type="number" id="inputNominal" class="nominal-input" placeholder="masukkan nominal rp di atas contoh : 10000">
+            
+            <p>2. UPLOAD FOTO BUKTI (AI SCAN):</p>
+            <input type="file" id="buktiTf" accept="image/*">
+            
+            <div id="loadingOCR" style="display:none; font-size: 11px; color: #00d9ff; margin-top: 10px;">
+                🔍 Sedang mengecek bukti dengan AI...
+            </div>
+
+            <div id="previewContainer">
+                <img id="imgPreview" src="" alt="Preview">
+            </div>
+
+            <div id="uploadStatus" class="status-msg" style="color: #ff4d4d;">Status: Menunggu Bukti</div>
+        </div>
+
+        <button class="btn-confirm" id="btnKonfirmasi" disabled>KONFIRMASI</button>
+        
+        <button id="btnBantuan" style="background:none; border:none; color:#64748b; cursor:pointer; margin-top:10px; text-decoration:underline; font-size: 11px;">
+            Click Bantuan Admin
+        </button>
+
+        <button style="background:none; border:none; color:#64748b; cursor:pointer; display:block; margin: 10px auto; text-decoration:underline; font-size: 11px;" onclick="window.location.href='index.html'">Kembali</button>
+    </div>
+
+    <script src="config.js"></script>
+
+    <script>
+        const nama = localStorage.getItem('pesanan_produk');
+        const hargaRaw = localStorage.getItem('pesanan_harga'); 
+        const hargaTarget = Number(hargaRaw) * 1000; 
+
+        const inputNominal = document.getElementById('inputNominal');
+        const fileInput = document.getElementById('buktiTf');
+        const btnKonf = document.getElementById('btnKonfirmasi');
+        const statusTeks = document.getElementById('uploadStatus');
+        const previewImg = document.getElementById('imgPreview');
+        const previewDiv = document.getElementById('previewContainer');
+        const loadingOCR = document.getElementById('loadingOCR');
+
+        // State untuk mengecek apakah AI sudah memvalidasi
+        let aiValidated = false;
+
+        if (nama && hargaRaw) {
+            document.getElementById('namaProduk').innerText = "Produk: " + nama;
+            document.getElementById('hargaProduk').innerText = 'Rp ' + hargaTarget.toLocaleString('id-ID');
+
+            const imgElement = document.getElementById('qrisImage');
+            imgElement.src = `qris/qris-${hargaRaw}.jpg`;
+            imgElement.onerror = function() { this.src = `qris/qris-${hargaRaw}.png`; };
+
+            // Fungsi utama pengecekan tombol
+            function validasiSistem() {
+                const nominalUser = Number(inputNominal.value);
+                
+                if (nominalUser === hargaTarget && aiValidated) {
+                    btnKonf.disabled = false;
+                    statusTeks.innerText = "Status: Bukti Valid & Nominal Cocok!";
+                    statusTeks.style.color = "#00ff87";
+                } else {
+                    btnKonf.disabled = true;
+                    if (nominalUser !== hargaTarget && nominalUser > 0) {
+                        statusTeks.innerText = "Status: Nominal input tidak sesuai harga!";
+                        statusTeks.style.color = "#ff4d4d";
+                    } else if (!aiValidated) {
+                        statusTeks.innerText = "Status: Menunggu Scan AI Berhasil...";
+                        statusTeks.style.color = "#ff4d4d";
+                    }
+                }
+            }
+
+            inputNominal.addEventListener('input', validasiSistem);
+
+fileInput.addEventListener('change', function() {
+    const file = this.files[0];
+    if (!file) return;
+
+    aiValidated = false; 
+    loadingOCR.style.display = "block";
+    statusTeks.innerText = "Status: AI sedang memproses gambar...";
+    statusTeks.style.color = "#00d9ff";
+    btnKonf.disabled = true;
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        previewImg.src = e.target.result;
+        previewDiv.style.display = "block";
+
+        // JALANKAN TESSERACT OCR DENGAN OPTIMASI KARAKTER
+        Tesseract.recognize(
+            e.target.result,
+            'eng',
+            { 
+                logger: m => {
+                    if(m.status === 'recognizing text') {
+                        loadingOCR.innerText = `🔍 Memindai: ${Math.floor(m.progress * 100)}%`;
+                    }
+                }
+            }
+        ).then(({ data: { text } }) => {
+            loadingOCR.style.display = "none";
+            
+            // Membersihkan teks dari spasi/titik/koma agar angka mentah mudah ditemukan
+            // Contoh: "Rp 50.000" menjadi "rp50000"
+            const scanResult = text.toLowerCase().replace(/[\s.,]/g, '');
+            const targetAngka = hargaTarget.toString();
+
+            console.log("Hasil Scan AI:", scanResult); // Cek di inspect console untuk debug
+
+            // Cek apakah angka nominal ada di dalam teks yang di-scan
+            const hasAmount = scanResult.includes(targetAngka);
+            
+            // Cek kata kunci bukti transfer (bisa 'rp', 'total', 'berhasil', atau 'transfer')
+            const keywords = ['rp', 'total', 'berhasil', 'transfer', 'nominal', 'bayar'];
+            const hasKeyword = keywords.some(word => scanResult.includes(word));
+
+            if (hasAmount) {
+                aiValidated = true;
+                statusTeks.innerText = "Status: Bukti Valid (Terdeteksi Rp " + hargaTarget.toLocaleString('id-ID') + ")";
+                statusTeks.style.color = "#00ff87";
+                validasiSistem();
+            } else {
+                aiValidated = false;
+                statusTeks.innerText = "Status: bukti ini palsu!";
+                statusTeks.style.color = "#ff4d4d";
+                
+                // Pesan bantuan jika gagal
+                alert("AI tidak menemukan angka " + hargaTarget + " di foto.\n\nTips: Pastikan foto bukti transfer terlihat JELAS, Dan Klik Detail, tidak terpotong, dan yang asli.");
+                fileInput.value = ""; 
+                previewDiv.style.display = "none";
+            }
+        }).catch(err => {
+            console.error(err);
+            loadingOCR.style.display = "none";
+            alert("Terjadi kesalahan koneksi AI.");
+        });
+    }
+    reader.readAsDataURL(file);
+});
+
+            btnKonf.onclick = function() {
+                if (typeof jalankanKonfirmasi === "function") {
+                    jalankanKonfirmasi(nama, hargaTarget);
+                } else {
+                    alert("Sistem error: config.js tidak terbaca.");
+                }
+            };
+
+        } else {
+            window.location.href = 'index.html';
+        }
+
+        // --- Partikel Background ---
+        const canvas = document.getElementById("particles");
+        const ctx = canvas.getContext("2d");
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener("resize", resize); resize();
+        const pts = [];
+        for (let i = 0; i < 50; i++) pts.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 2, dx: (Math.random() - 0.5) * 0.4, dy: (Math.random() - 0.5) * 0.4 });
+        function draw() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.fillStyle = "rgba(0, 217, 255, 0.4)";
+            pts.forEach(p => { p.x += p.dx; p.y += p.dy; if (p.x < 0 || p.x > canvas.width) p.dx *= -1; if (p.y < 0 || p.y > canvas.height) p.dy *= -1; ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2); ctx.fill(); });
+            requestAnimationFrame(draw);
+        }
+        draw();
+    </script>
+</body>
+</html>

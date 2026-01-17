@@ -1,126 +1,192 @@
-    <!DOCTYPE html>
-    <html lang="id">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GSS TEAM VVIP</title>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GSS TEAM VVIP</title>
 
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-        <!-- CSS EXTERNAL -->
-        <link rel="stylesheet" href="style.css">
-    </head>
+    <link rel="stylesheet" href="style.css">
 
-    <body>
+    <style>
+        /* Atur Box Sizing agar padding tidak merusak lebar */
+* {
+    box-sizing: border-box;
+}
+
+/* Container Utama: Berjajar di PC, Menumpuk di Android */
+.container, #testimonial-container {
+    display: grid;
+    /* Di PC: Minimal 300px per kartu. Di Android: Otomatis 1 kolom */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 15px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px;
+}
+
+/* Card agar ukurannya pas di layar Android yang sempit */
+.card, .testimonial-card, .review-form {
+    width: 100%; /* Mengikuti lebar layar */
+    margin-bottom: 10px;
+    padding: 20px;
+    word-wrap: break-word; /* Mencegah teks keluar dari box */
+}
+
+/* Video agar tetap 16:9 di Android */
+.video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* Rasio 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.video-wrapper iframe, .video-wrapper video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Media Query Khusus Android (Layar Kecil) */
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 1.8rem; /* Ukuran judul lebih kecil di HP */
+    }
+    
+    .modal-content {
+        width: 95%; /* Modal hampir full layar di HP */
+        padding: 20px 15px;
+    }
+
+    .option-btn, .option-btn1 {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    /* Hilangkan animasi partikel jika berat di Android jadul (Opsional) */
+    #particles {
+        opacity: 0.5;
+    }
+}
+    </style>
+
+</head>
+
+<body>
     <div id="toast">⚠️ SETIAP BARU MASUK LINK INI DI WAJIB KAN REFRESH DULU, SAPA TAU ADA PROMO!!</div>
-        <canvas id="particles"></canvas>
+    <canvas id="particles"></canvas>
 
+    <div class="container">
         <h1>
             <span class="judul-putih">GSS TEAM</span>
             <span class="judul-hijau">VVIP</span>
         </h1>
 
-        <div class="container">
-            <div class="card">
-                <h2>CONFIG FIX LAG VVIP</h2>
-                <p>File ini sangat direkomendasikan untuk kalian yang mengalami lag atau patah-patah saat bermain Free Fire. Optimalkan performa HP kalian dan rasakan gameplay yang lebih lancar!<br>
-            </div>
+        <div class="card">
+            <h2>CONFIG FIX LAG VVIP</h2>
+            <p>File ini sangat direkomendasikan untuk kalian yang mengalami lag atau patah-patah saat bermain Free Fire. Optimalkan performa HP kalian dan rasakan gameplay yang lebih lancar!</p>
+        </div>
 
-            <div class="card">
-                <h4>📣 paket 1</h4>
-                <p>
-                • Stabilizer 25%<br>
-                • Optimasi Sinyal 20%<br>
-                •  Update File -<br>
-                </p>
-                </div>
+        <div class="card">
+            <h4>📣 paket 1</h4>
+            <p>• Stabilizer 25%<br>• Optimasi Sinyal 20%<br>• Update File -</p>
+        </div>
 
-                <div class="card">
-                <h4>📣 paket 2</h4>
-                <p>
-                • Stabilizer 30%<br>
-                • Optimasi Sinyal 25%<br>
-                • Auto 30 FPS<br>
-                • Update File -<br>
-                </p>
-                </div>
+        <div class="card">
+            <h4>📣 paket 2</h4>
+            <p>• Stabilizer 30%<br>• Optimasi Sinyal 25%<br>• Auto 30 FPS<br>• Update File -</p>
+        </div>
 
-                <div class="card">
-                <h4>📣 paket 3</h4>
-                <p>
-                • Penghilang Lag 55%<br>
-                • Stabilizer 55%<br>
-                • Optimasi Sinyal 40%<br>
-                • Auto FPS 45<br>
-                • Update File -<br>
-                </p>
-                </div>
+        <div class="card">
+            <h4>📣 paket 3</h4>
+            <p>• Penghilang Lag 55%<br>• Stabilizer 55%<br>• Optimasi Sinyal 40%<br>• Auto FPS 45<br>• Update File -</p>
+        </div>
 
-                <div class="card">
-                <h4>📣 paket 4</h4>
-                <p>
-                • Penghilang Lag 70%<br>
-                • Stabilizer 55%<br>
-                • Optimasi Sinyal 50%<br>
-                • Auto FPS 60<br>
-                • Update File (YES)<br>
-                </p>
-                </div>
+        <div class="card">
+            <h4>📣 paket 4</h4>
+            <p>• Penghilang Lag 70%<br>• Stabilizer 55%<br>• Optimasi Sinyal 50%<br>• Auto FPS 60<br>• Update File (YES)</p>
+        </div>
 
+        <div class="card">
+            <h4>📣 paket 5</h4>
+            <p>• Penghilang Lag 90%<br>• Stabilizer 75%<br>• Optimasi Sinyal 65%<br>• Auto FPS 90<br>• Update File (YES)</p>
+        </div>
 
-                <div class="card">
-                <h4>📣 paket 5</h4>
-                <p>
-                • Penghilang Lag 90%<br>
-                • Stabilizer 75%<br>
-                • Optimasi Sinyal 65%<br>
-                • Auto FPS 90<br>
-                • Update File (YES)<br>
-                </p>
-            </div>
-
-                    <div class="card">
-            <!-- Form langsung terlihat tanpa tombol BUY CLICK -->
+        <div class="card">
             <label for="productSelect">Pilih produk:</label>
             <select id="productSelect">
-                <option value="" data-price="0">pilih</option>
-                <option value="paket 1" data-price="25">paket 1 - Rp 25K</option>
-                <option value="paket 2" data-price="35">paket 2 - Rp 35K</option>
-                <option value="paket 3" data-price="50">paket 3 - Rp 50K</option>
-                <option value="" data-price="0">📂 PERMANENT 📂</option>
-                <option value="paket 4" data-price="65">paket 4 - Rp 65K</option>
-                <option value="paket 5" data-price="75">paket 5 - Rp 75K</option>
-
-
-
+                <option value="" data-price="0">-- Pilih Paket --</option>
+                <option value="Paket 1" data-price="25">Paket 1 - Rp 25K</option>
+                <option value="Paket 2" data-price="35">Paket 2 - Rp 35K</option>
+                <option value="Paket 3" data-price="50">Paket 3 - Rp 50K</option>
+                <option disabled>── PERMANENT ──</option>
+                <option value="Paket 4" data-price="65">Paket 4 - Rp 65K</option>
+                <option value="Paket 5" data-price="75">Paket 5 - Rp 75K</option>
             </select>
             <p id="priceDisplay">Harga: -</p>
             <button id="confirmBtn">ORDER NOW</button>
         </div>
 
-
-
-            <div class="card">
-                <h2>📞 ADMIN C1?</h2>
-                <p>Kalo Admin Centang 1 , Click Laporan</p>
-                <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
-
-                <br><br>
-
-                <h2>📨 SALURAN WHATSAPP</h2>
-                <p>Testimoni & Informasi Promo!</p>
-                <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
-            </div>
-
+        <div class="card">
+            <h2>📞 ADMIN C1?</h2>
+            <p>Kalo Admin Centang 1 , Click Laporan</p>
+            <a class="btn" href="https://go.crisp.chat/chat/embed/?website_id=1cdef2e3-a58b-41b0-9752-68707a1035b7" target="_blank">Laporan Admin</a>
+            <br><br>
+            <h2>📨 SALURAN WHATSAPP</h2>
+            <p>Testimoni & Informasi Promo!</p>
+            <a class="btn" href="https://www.whatsapp.com/channel/0029VailYTWL7UVbHGSsjM2B" target="_blank">Join Saluran</a>
         </div>
+    </div>
 
-        <script src="ganti nomor/file vip/no.js"></script>
-    <script src="script.js"></script>
+    <script>
+        const productSelect = document.getElementById('productSelect');
+        const priceDisplay = document.getElementById('priceDisplay');
+        const confirmBtn = document.getElementById('confirmBtn');
 
-        <script>
+        // Fungsi Update Harga
+        productSelect.addEventListener('change', () => {
+            const selectedOption = productSelect.selectedOptions[0];
+            const price = selectedOption.getAttribute('data-price');
+            
+            if (price && price !== "0") {
+                priceDisplay.innerText = "Harga: Rp " + (price * 1000).toLocaleString('id-ID');
+            } else {
+                priceDisplay.innerText = "Harga: -";
+            }
+        });
 
+        // Fungsi Tombol Order
+        confirmBtn.addEventListener('click', () => {
+            const productName = productSelect.value;
+            const priceValue = productSelect.selectedOptions[0].getAttribute('data-price');
 
+            if (!productName || priceValue === "0") {
+                alert('Silakan pilih paket terlebih dahulu!');
+                return;
+            }
+
+            // Simpan ke LocalStorage agar dibaca order.html
+            localStorage.setItem('pesanan_produk', productName);
+            localStorage.setItem('pesanan_harga', priceValue);
+
+            // Pindah ke halaman order
+            window.location.href = "order.html";
+        });
+    </script>
+
+    <script>
         const canvas = document.getElementById("particles");
         const ctx = canvas.getContext("2d");
 
@@ -131,23 +197,21 @@
         window.addEventListener("resize", resize);
         resize();
 
-        const particles = [];
+        const particlesArr = [];
         for (let i = 0; i < 90; i++) {
-            particles.push({
+            particlesArr.push({
                 x: Math.random() * canvas.width,
                 y: Math.random() * canvas.height,
                 r: Math.random() * 2 + 0.5,
                 dx: (Math.random() - 0.5) * 0.4,
                 dy: (Math.random() - 0.5) * 0.4,
-                color: Math.random() > 0.5
-                    ? "rgba(0,217,255,0.7)"
-                    : "rgba(255,255,255,0.4)"
+                color: Math.random() > 0.5 ? "rgba(0,217,255,0.7)" : "rgba(255,255,255,0.4)"
             });
         }
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
+            particlesArr.forEach(p => {
                 p.x += p.dx;
                 p.y += p.dy;
                 if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
@@ -160,8 +224,7 @@
             requestAnimationFrame(draw);
         }
         draw();
-        </script>
-
-
-    </body>
-    </html>
+    </script>
+    <script src="anticolong.js"></script>
+</body>
+</html>
