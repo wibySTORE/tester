@@ -1,7 +1,7 @@
 
 // 1. Setting Nomor
-const CONFIG_NOMOR_ORDER   = ""; 
-const CONFIG_NOMOR_BANTUAN = "";
+const CONFIG_NOMOR_ORDER   = "6285134200084"; 
+const CONFIG_NOMOR_BANTUAN = "6285134200084";
 const PESAN_BANTUAN        = "Halo Admin, saya butuh bantuan mengenai pembayaran di GSS TEAM.";
 
 // 2. Fungsi Konfirmasi (Pastikan nama fungsi sama persis)
@@ -22,3 +22,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
