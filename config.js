@@ -1,13 +1,10 @@
+// 1. Setting Username Telegram
+const CONFIG_TELE_ADMIN = "gssteamvip"; 
 
-// 1. Setting Nomor
-const CONFIG_NOMOR_ORDER   = "6285134200084"; 
-const CONFIG_NOMOR_BANTUAN = "6285134200084";
-const PESAN_BANTUAN        = "Halo Admin, saya butuh bantuan mengenai pembayaran di GSS TEAM.";
-
-// 2. Fungsi Konfirmasi (Pastikan nama fungsi sama persis)
+// 2. Fungsi Konfirmasi
 function jalankanKonfirmasi(namaProduk, hargaTotal) {
-    const msg = `Halo Admin, saya sudah transfer.\n\nProduk: ${namaProduk}\nTotal: Rp ${hargaTotal.toLocaleString('id-ID')}\n\n*Bukti foto sudah saya lampirkan.*`;
-    const url = `https://wa.me/${CONFIG_NOMOR_ORDER}?text=${encodeURIComponent(msg)}`;
+    // Membuka chat Telegram ke gssteamvip
+    const url = `https://t.me/${CONFIG_TELE_ADMIN}`;
     window.open(url, '_blank');
 }
 
@@ -16,10 +13,9 @@ document.addEventListener("DOMContentLoaded", function() {
     const btnBantuan = document.getElementById('btnBantuan');
     if (btnBantuan) {
         btnBantuan.onclick = function() {
-            const urlBantuan = `https://wa.me/${CONFIG_NOMOR_BANTUAN}?text=${encodeURIComponent(PESAN_BANTUAN)}`;
+            // Membuka chat Telegram ke gssteamvip
+            const urlBantuan = `https://t.me/${CONFIG_TELE_ADMIN}`;
             window.open(urlBantuan, '_blank');
         };
     }
-
 });
-
